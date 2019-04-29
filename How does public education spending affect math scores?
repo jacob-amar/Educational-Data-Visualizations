@@ -17,13 +17,15 @@ spending_data = spending_data.drop(['INDICATOR','SUBJECT','MEASURE','FREQUENCY',
 edu_data = pd.merge(avg_score, spending_data, on=['LOCATION','TIME'])
 
 edu_data = edu_data.rename(columns = {'LOCATION':'Country', 'Value_x':'Mean_Score', 'Value_y':'Spending'})
-#countries = ['USA','CAN','ITA','FRA','GBR','JPN','SWE','RUS','ESP']
-#edu_data = edu_data[edu_data['Country'].isin(countries)]
 
-#print(edu_data) 
+x = edu_data.Spending
+y = edu_data.Mean_Score
 
-#plt.plot(edu_data.Spending, edu_data.Mean_Score, 'ro')
-plt.plot(edu_data.Country, edu_data[edu_data['Mean_Score'].index()])
+plt.plot(x, y, 'ro')
+plt.xlabel("US Dollars per Student")
+plt.ylabel("Mean PISA Math Score")
+plt.title("How does education spending affect math scores?")
 
-
-
+#optional line of best fit:
+#line = np.poly1d(np.polyfit(x, y, 1))
+#plt.plot(x, line(x))
